@@ -26,6 +26,7 @@ namespace ApiTrial1.Controllers
 
             try 
             {
+
                 var bs = new BS.BS();
                 var user = bs.ADM_User.getByUsernameAndToken(request.Username, request.Token);
 
@@ -42,6 +43,8 @@ namespace ApiTrial1.Controllers
                     file.FileName = request.FileName;
                     file.File = "Uploads\\StaticContent\\" + request.FileName;
                     file.UploadedBy = user.Id;
+
+                    bs.DCM_Document.insert(file);
                 }//checks if the uploader is either the original uloader or a recruiter.
                 else if(file.UploadedBy != user.Id && user.ADM_Role.Id != 100)
                 {

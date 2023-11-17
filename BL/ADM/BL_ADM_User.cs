@@ -33,7 +33,7 @@ namespace ApiTrial1.BL.ADM
         //compare the user's session token to the last stored session token
         public ADM_User getByUsernameAndToken(string Username, string Token)
         {
-            return getAll().Where(p => p.Username == Username && p.ADM_User_Access.LastOrDefault().Token == Token).FirstOrDefault();
+            return getAll().Where(p => p.Username == Username && p.ADM_User_Access.OrderBy(q => q.Id).LastOrDefault().Token == Token).FirstOrDefault();
         }
 
 

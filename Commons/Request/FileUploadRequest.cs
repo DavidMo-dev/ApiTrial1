@@ -2,10 +2,10 @@
 {
     public class FileUploadRequest
     {
-        public string Username;
-        public string Token;
-        public IFormFile File;
-        public int FileId;
-        public string FileName;
+        public string Username { get; set; }
+        public string Token { get; set; }
+        public IFormFile File { get; set; }
+        public int FileId { get; set; }
+        public string FileName { get; set; }
     }
 }

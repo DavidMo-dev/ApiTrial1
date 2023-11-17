@@ -51,30 +51,30 @@ app.MapControllers();
 System.Web.HttpContext.Configure(app.Services.GetRequiredService<Microsoft.AspNetCore.Http.IHttpContextAccessor>());
 
 
-var bs = new BS();
+//var bs = new BS();
 
-var recruiterRole = new ADM_Role(100, "Recruiter");
-var candidateRole = new ADM_Role(200, "Candidate");
+//var recruiterRole = new ADM_Role(100, "Recruiter");
+//var candidateRole = new ADM_Role(200, "Candidate");
 
-bs.ADM_Role.insert(recruiterRole);
-bs.ADM_Role.insert(candidateRole);
+//bs.ADM_Role.insert(recruiterRole);
+//bs.ADM_Role.insert(candidateRole);
 
-var recruiter = new ADM_User();
+//var recruiter = new ADM_User();
 
-recruiter.Username = "RecruiterName";
-recruiter.PasswordHash = bs.ADM_User.getPasswordHash(recruiter.Username, "RecruiterPassword");
-recruiter.ADM_Role = recruiterRole;
+//recruiter.Username = "RecruiterName";
+//recruiter.PasswordHash = bs.ADM_User.getPasswordHash(recruiter.Username, "RecruiterPassword");
+//recruiter.ADM_Role = recruiterRole;
 
-var candidate = new ADM_User();
+//var candidate = new ADM_User();
 
-candidate.Username = "CandidateName";
-candidate.PasswordHash = bs.ADM_User.getPasswordHash(candidate.Username, "CandidatePassword");
-candidate.ADM_Role = candidateRole;
+//candidate.Username = "CandidateName";
+//candidate.PasswordHash = bs.ADM_User.getPasswordHash(candidate.Username, "CandidatePassword");
+//candidate.ADM_Role = candidateRole;
 
-bs.ADM_User.insert(recruiter);
-bs.ADM_User.insert(candidate);
+//bs.ADM_User.insert(recruiter);
+//bs.ADM_User.insert(candidate);
 
-bs.save();
+//bs.save();
 
 
 app.Run();

@@ -29,26 +29,26 @@ namespace ApiTrial1.Controllers
                 var user = bs.ADM_User.getByUsername(request.Username);
                 if (user == null)
                 {
-                    return ResultClass.WithError("Usuario o contraseña incorrectos.");
+                    return ResultClass.WithError("Incorrect username or password.");
                 }
                 var hashedPassword = bs.ADM_User.getPasswordHash(request.Username, request.Password);
                 if (hashedPassword != user.PasswordHash)
                 {
-                    return ResultClass.WithError("Usuario o contraseña incorrectos.");
+                    return ResultClass.WithError("Incorrect username or password.");
                 }
 
-                // Si todo es correcto, creamos un nuevo token.
+                // if correct, a new token is generated.
                 var access = new ADM_User_Access();
                 access.Token = SessionTokenHelper.GenerateToken() + SHA256Helper.SHA256(user.Id.ToString());
                 access.CreateDate = DateTime.Now;
 
-                // Añadimos el acceso al usuario
+                // adds user access
                 user.ADM_User_Access.Add(access);
 
-                // Guardamos
+                // save
                 bs.save();
 
-                // Establecemos el token en la Cookie de la sesión
+                // save token in cookie 
                 Response.Cookies.Append("SessionToken", access.Token, new Microsoft.AspNetCore.Http.CookieOptions()
                 {
                     Path = "/",
@@ -57,7 +57,7 @@ namespace ApiTrial1.Controllers
                     Secure = true
                 });
 
-                // Devolvemos el token
+                // return token
                 return ResultClass.WithContent(new LoginResult
                 {
                     Username = user.Username,
@@ -67,7 +67,7 @@ namespace ApiTrial1.Controllers
             }
             catch
             {
-                return ResultClass.WithError("Usuario o contraseña incorrectos.");
+                return ResultClass.WithError("Incorrect username or password.");
             }
 
         }

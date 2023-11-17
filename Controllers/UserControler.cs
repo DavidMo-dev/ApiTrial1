@@ -14,7 +14,7 @@ namespace ApiTrial1.Controllers
 
         [ActionName("setcandidate")]
         [HttpPost]
-        public ActionResult SetCandidate(CandidateRquest request)
+        public ActionResult SetCandidate(SetCandidateRquest request)
         {
             try
             {
@@ -39,6 +39,8 @@ namespace ApiTrial1.Controllers
                         candidate.PasswordHash = bs.ADM_User.getPasswordHash(request.CandidateUsername, request.CandidatePassword);
                         candidate.RoleId = 200;
 
+                        bs.ADM_User.insert(candidate);
+
                     }//checks if user to be modified has a candidate role
                     else if (candidate.ADM_Role.Id != 200)
                     {
@@ -49,6 +51,7 @@ namespace ApiTrial1.Controllers
                         //Edits existing candidate
                         candidate.Username = request.CandidateUsername;
                         candidate.PasswordHash = bs.ADM_User.getPasswordHash(request.CandidateUsername, request.CandidatePassword);
+                       
                     }
 
                     //apply changes or candidate insert on save(), validations donde in BS class
@@ -71,7 +74,7 @@ namespace ApiTrial1.Controllers
 
         [ActionName("deletecandidate")]
         [HttpPost]
-        public ActionResult DeleteCandidate(CandidateRquest request)
+        public ActionResult DeleteCandidate(SetCandidateRquest request)
         {
             try
             {
